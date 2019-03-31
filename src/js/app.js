@@ -19,8 +19,11 @@ class App extends Component {
   }
 
   async onClick() {
-    await this.scatter.connect();
-    await this.scatter.login();
+    const scatter = this.scatter;
+    await scatter.connect();
+    await scatter.login();
+    await scatter.loadContract("eosknightsio");
+    await scatter.contract.signup("raindaysmain");
   }
 
   render() {

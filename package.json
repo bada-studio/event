@@ -4,13 +4,13 @@
   "private": true,
   "dependencies": {
     "crypto-js": "^3.1.9-1",
-    "eosjs": "^20.0.0-beta3",
+    "eosjs": "^16.0.9",
     "gh-pages": "^2.0.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-scripts": "^2.1.2",
     "scatterjs-core": "^2.7.16",
-    "scatterjs-plugin-eosjs2": "^1.5.0"
+    "scatterjs-plugin-eosjs": "^1.5.1"
   },
   "scripts": {
     "start": "react-scripts start",

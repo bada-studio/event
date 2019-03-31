@@ -1,6 +1,6 @@
 import ScatterJS from 'scatterjs-core';
-import ScatterEOS from 'scatterjs-plugin-eosjs2';
-import {JsonRpc, Api} from 'eosjs';
+import ScatterEOS from 'scatterjs-plugin-eosjs';
+import Eos from 'eosjs';
 
 export default class ScatterBridge {
 
@@ -8,20 +8,23 @@ export default class ScatterBridge {
     this.appName = appName;
     ScatterJS.plugins(new ScatterEOS());
 
-    this.network = ScatterJS.Network.fromJson(network);
-    this.rpc = new JsonRpc(network.fullhost());
+    this.account = null;
+    this.eosOptions = { expireInSeconds:60 };
+    this.isConnected = false;
+    this.contract = null;
 
     this.eosApi = null;
-    this.account = null;
-    this.isConnected = false;
+    this.network = ScatterJS.Network.fromJson(network);
   }
 
   async connect() {
-    await ScatterJS.connect(this.appName, this.network).then(connected => {
+    const net = this.network;
+    await ScatterJS.connect(this.appName, {net}).then(connected => {
       console.log("connected:" + connected);
       this.isConnected = connected;
       if (connected) {
-        this.eosApi = ScatterJS.eos(this.network, Api, {rpc, beta3:true});
+        this.eosApi = ScatterJS.eos(this.network, Eos);
+        console.log("create eos Api");
       }
     });
   }
@@ -35,6 +38,10 @@ export default class ScatterBridge {
     } else {
       console.log("check connection first!");
     }
+  }
+
+  async loadContract(name) {
+    this.contract = await this.eosApi.contract(name);
   }
 
   async logout() {
@@ -52,13 +59,13 @@ export default class ScatterBridge {
     }
   }
 
-  makeAction(contract, actionName, data, perm = this.account.authority) {
+  makeAction(contract, actionName, data) {
     return {
       account: contract,
       name: actionName,
       authorization: [{
         actor: this.account.name,
-        permission: perm// this.currentAccount.authority
+        permission: this.account.authority
       }],
       data: data
     };

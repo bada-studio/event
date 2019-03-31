@@ -1,57 +1,66 @@
-import ScatterJS from "scatterjs-core";
-import ScatterEOS from "scatterjs-plugin-eosjs2";
-import { Api, JsonRpc } from "eosjs";
+import ScatterJS from 'scatterjs-core';
+import ScatterEOS from 'scatterjs-plugin-eosjs2';
+import {JsonRpc, Api} from 'eosjs';
 
 export default class ScatterBridge {
 
-    constructor(network, appName) {
-        this.appName = appName;
-        ScatterJS.plugins(new ScatterEOS());
-        this.scatter = ScatterJS.scatter;
-        this.network = network;
-        const rpc = new JsonRpc(`${network.protocol}://${network.host}:${network.port}`);
-        this.currentAccount = null;
-        this.reqFields = { accounts: [network] };
-        this.eosApi = this.scatter.eos(network, Api, {rpc});
-        this.isConnected = false;
+  constructor(network, appName) {
+    this.appName = appName;
+    ScatterJS.plugins(new ScatterEOS());
 
-        //window.ScatterJS = null;
-        //window.ScatterEOS = null;
-    }
+    this.network = ScatterJS.Network.fromJson(network);
+    this.rpc = new JsonRpc(network.fullhost());
 
-    async connect() {
-        this.isConnected = await this.scatter.connect(this.appName);
-    }
+    this.eosApi = null;
+    this.account = null;
+    this.isConnected = false;
+  }
 
-    async getIdentity() {
-        if(this.isConnected) {
-            await this.scatter.getIdentity(this.reqFields);
-            this.currentAccount = this.scatter.identity.accounts.find(x => x.blockchain === "eos");
-        }
-    }
+  async connect() {
+    await ScatterJS.connect(this.appName, this.network).then(connected => {
+      console.log("connected:" + connected);
+      this.isConnected = connected;
+      if (connected) {
+        this.eosApi = ScatterJS.eos(this.network, Api, {rpc, beta3:true});
+      }
+    });
+  }
 
-    async sendTx(actions) {
-        if(actions.length) {
-            await this.eosApi.transact({
-                actions: actions
-            }, {blocksBehind: 3, expireSeconds: 30 });
-        }
+  async login() {
+    if (this.isConnected) {
+      await ScatterJS.login().then(id => {
+        this.account = ScatterJS.account('eos');
+        console.log(this.account);
+      });
+    } else {
+      console.log("check connection first!");
     }
+  }
 
-    updateNetwork(network) {
-        const rpc = new JsonRpc(`${network.protocol}://${network.host}:${network.port}`);
-        this.eosApi = this.scatter.eos(network, Api, {rpc});
-    }
+  async logout() {
+    await ScatterJS.logout().then(() => {
+      console.log("logout done!");
+      this.account = null;
+    });
+  }
 
-    makeAction(contract, actionName, data, perm = this.currentAccount.authority) {
-        return {
-            account: contract,
-            name: actionName,
-            authorization: [{
-                actor: this.currentAccount.name,
-                permission: perm// this.currentAccount.authority
-            }],
-            data: data
-        };
+  async sendTx(actions) {
+    if(actions.length) {
+      await this.eosApi.transact({
+        actions: actions
+      }, {blocksBehind: 3, expireSeconds: 30 });
     }
+  }
+
+  makeAction(contract, actionName, data, perm = this.account.authority) {
+    return {
+      account: contract,
+      name: actionName,
+      authorization: [{
+        actor: this.account.name,
+        permission: perm// this.currentAccount.authority
+      }],
+      data: data
+    };
+  }
 }

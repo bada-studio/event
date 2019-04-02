@@ -8,6 +8,9 @@ const Config = {
     host: "api.eoseoul.io",
     port:443,
     protocol:'https'
+  },
+  url: {
+    bastet:"https://bastet.eosknights.io/event/item/",
   }
 };
 

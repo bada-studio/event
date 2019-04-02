@@ -3,6 +3,7 @@ import { PostWrapper, EventPost, SimpleLoader } from '../../Components';
 import { ChainService } from "../../Services";
 import Config from "../../Config";
 import Alert from 'react-s-alert';
+import axios from 'axios';
 
 class PostContainer extends Component {
   constructor(props) {
@@ -106,8 +107,8 @@ class PostContainer extends Component {
       fetching: true
     });
 
-    const player = await this.chain.readTableRow("eosknightsio", "playerv", this.state.name);
-    const playerv = await this.chain.readTableRow("eosknightsio", "playerv", this.state.name);
+    const player = await this.chain.readTableRow("eosknightsio", "player", this.state.name);
+    const playerv = await this.chain.readTableRow("eosknightsio", "playerv2", this.state.name);
     this.setState({
       fetching: false
     });
@@ -123,7 +124,7 @@ class PostContainer extends Component {
     }
 
     if (playerv !== null && playerv.owner === this.state.name && playerv.itemevt === this.state.info.id) {
-      Alert.error(`You've already got ${this.state.itemName}`, {
+      Alert.error(`You've already got '${Config.itemName}'`, {
         position: 'top-right',
         effect: 'slide',
         beep: false,
@@ -131,6 +132,37 @@ class PostContainer extends Component {
       });    
       return;
     }
+
+    await this.getEventItem();
+  }
+
+  async getEventItem() {
+    this.setState({
+      fetching: true
+    });
+
+    const url = Config.url.bastet + this.state.name;
+    await axios.get(url)
+      .then(function (response) {
+        Alert.success(`You got a '${Config.itemName}'!`, {
+          position: 'top-right',
+          effect: 'slide',
+          beep: false,
+          timeout: 7000
+        });
+      })
+      .catch(function (error) {
+        Alert.error(`Can not get a '${Config.itemName}'`, {
+          position: 'top-right',
+          effect: 'slide',
+          beep: false,
+          timeout: 3000
+        });    
+      });
+
+    this.setState({
+      fetching: false
+    });
   }
 
   componentDidMount() {

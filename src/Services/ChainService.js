@@ -16,11 +16,16 @@ export default class ChainService {
       json: true
     };
 
-    return await axios.post(url, data, {
-      headers: { 
-        'content-type': 'text/plain'
-      }
-    });
+    try {
+      return await axios.post(url, data, {
+        headers: { 
+          'content-type': 'text/plain'
+        }
+      });
+    } catch (e) {
+      return null;
+      console.log(e);
+    }
   }
 
   async readTableRow(code, table, from, keyType = "name") {
@@ -37,16 +42,21 @@ export default class ChainService {
       json: true
     };
 
-    const res = await axios.post(url, data, {
-      headers: { 
-        'content-type': 'text/plain'
+    try {
+      const res = await axios.post(url, data, {
+        headers: { 
+          'content-type': 'text/plain'
+        }
+      });
+
+      if (res.data === null || res.data.rows === null || res.data.rows.length === 0) {
+        return null;
       }
-    });
 
-    if (res.data === null || res.data.rows === null || res.data.rows.length === 0) {
+      return res.data.rows[0];
+    } catch (e) {
       return null;
+      console.log(e);
     }
-
-    return res.data.rows[0];
   }
 }

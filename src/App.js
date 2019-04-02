@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import { Header, PostWrapper } from "./Components";
 import { PostContainer } from "./Containers";
 import ScatterBridge from "./Utils/ScatterBridge";
+import Config from "./Config";
+import Alert from 'react-s-alert';
+
+import 'react-s-alert/dist/s-alert-default.css';
+import 'react-s-alert/dist/s-alert-css-effects/slide.css';
 import "./App.css";
 
 class App extends Component {
@@ -9,16 +13,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-        network: {
-          blockchain:'eos',
-          chainId:'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-          host: "api.eoseoul.io",
-          port:443,
-          protocol:'https'
-        }
     };
 
-    this.scatter = new ScatterBridge(this.state.network, "EK Event");
+    this.scatter = new ScatterBridge(Config.network, "EK Event");
     this.onClick = this.onClick.bind(this);
   }
 
@@ -32,8 +29,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header/>
         <PostContainer/>
+        <Alert stack={{limit: 3}} />
       </div>
     );
   }

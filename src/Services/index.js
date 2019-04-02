@@ -1,5 +1,5 @@
-import EkEventService from './EkEventService/EkEventService';
+import ChainService from './ChainService';
 
 export {
-    EkEventService
+    ChainService
 };

@@ -1,15 +1,41 @@
 .EventPost {
-    padding: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 2rem;
-    background-color: #FAFAFA;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+
+  text-align: center;
 }
 
 .EventPost h1 {
-    font-size: 3rem;
+  font-size: 2rem;
 }
 
 .EventPost p {
-    font-size: 2rem;   
+  font-size: 2rem;   
+}
+
+.EventPost .Sponsor {
+  color:#888;
+}
+
+.EventPost .ImgBox {
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  padding:20px;
+}
+
+.EventPost .ItemImage {
+  width:200px;
+  height:200px;
+}
+
+.EventPost .SponsorIcon {
+  width:48px;
+  height:48px;
+}
+
+.EventPost .CrossIcon {
+  width:48px;
+  height:48px;
+  opacity: 0.5;
 }

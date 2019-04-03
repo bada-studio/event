@@ -12,7 +12,7 @@ const EventPost = ({state, inputDisabled, gotThis, time, timeColor, imgUrl, onCl
     </div>
         
     <h1>
-      Make EOS Fun with {Config.sponsor}!
+      Make your EOS Fun with {Config.sponsor}!
     </h1>
     <div>
       Play EOS Knights with free {Config.itemName}.

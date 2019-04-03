@@ -1,2 +1,2 @@
-npm run predeploy
+npm run deploy
 serve -s build

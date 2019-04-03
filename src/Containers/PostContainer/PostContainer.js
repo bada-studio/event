@@ -114,9 +114,10 @@ class PostContainer extends Component {
     });
 
     if (player == null || player.owner !== this.state.name) {
-      Alert.error('Sign up the EOS Knights first!', {
+      Alert.error('Please sign up the EOS Knights first!<br/>Download EOS Knights with blow link.', {
         position: 'top-right',
         effect: 'slide',
+        html: true,
         beep: false,
         timeout: 3000
       });    

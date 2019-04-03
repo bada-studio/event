@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Header, PostWrapper } from "./Components";
 import { PostContainer } from "./Containers";
 import ScatterBridge from "./Utils/ScatterBridge";
 import Config from "./Config";
@@ -29,6 +30,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Header/>
         <PostContainer/>
         <Alert stack={{limit: 3}} />
       </div>

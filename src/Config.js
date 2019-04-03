@@ -1,5 +1,6 @@
 const Config = {
   sponsor: "EOS Nation",
+  sponsorLink: "https://eosnation.io",
   itemName: "Nation Armor",
   itemGrade: "Rare",
   network: {

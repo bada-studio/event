@@ -46,7 +46,7 @@ const EventPost = ({state, inputDisabled, gotThis, time, timeColor, imgUrl, onCl
 
     <List>
       <List.Item>One account can get only one {Config.itemName}</List.Item>
-      <List.Item>Crafting Nation Armor is almost impossible.</List.Item>
+      <List.Item>Crafting {Config.itemName} is almost impossible.</List.Item>
       <List.Item>You can trade the {Config.itemName} and change it into magic waters.</List.Item>
       <List.Item>If you see error message, you should download the game with below links.</List.Item>
     </List>

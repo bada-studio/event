@@ -1,7 +1,8 @@
 const Config = {
-  sponsor: "EOS Nation",
-  sponsorLink: "https://eosnation.io",
-  itemName: "Nation Armor",
+  sponsor: "EOS Canada",
+  sponsorLink: "https://www.eoscanada.com/",
+  sponsorImage: "https://eosknights.io/img/bp/eoscanada.png",
+  itemName: "Maple Staff",
   itemGrade: "Rare",
   network: {
     blockchain:'eos',

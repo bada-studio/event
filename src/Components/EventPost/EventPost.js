@@ -8,7 +8,7 @@ const EventPost = ({state, inputDisabled, gotThis, time, timeColor, imgUrl, onCl
     <div>
       <a href="https://eosknights.io"><img className="SponsorIcon" src="https://eosknights.io/img/icon.png"/></a>
       <img className="CrossIcon" src="https://eosknights.io/img/cross.png"/>
-      <a href={Config.sponsorLink}><img className="SponsorIcon" src="https://eosknights.io/img/bp/eosnation.png"/></a>
+      <a href={Config.sponsorLink}><img className="SponsorIcon" src={Config.sponsorImage}/></a>
     </div>
         
     <h1>

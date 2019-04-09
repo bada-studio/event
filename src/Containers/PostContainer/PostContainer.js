@@ -124,7 +124,7 @@ class PostContainer extends Component {
       return;
     }
 
-    if (playerv !== null && playerv.owner === this.state.name && playerv.itemevt === this.state.info.id) {
+    if (playerv !== null && playerv.owner === this.state.name && playerv.itemevt === this.state.info.key) {
       Alert.error(`You've already got '${Config.itemName}'`, {
         position: 'top-right',
         effect: 'slide',

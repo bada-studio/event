@@ -1,0 +1,27 @@
+.GameInfoBox div {
+  margin-top:1.5em;
+  margin-bottom:1em;
+}
+
+.GameInfoBox h3 {
+  font-size:1.2em;
+  margin:0;
+  padding:0;
+}
+
+.GameInfoBox .Desc {
+  font-size:0.9em;
+  margin:0;
+  padding:0;
+  color:#AAA;
+}
+
+.GameInfoBox .AppIcon {
+  width: 120px;
+  height: auto;
+}
+
+.GameInfoBox .AppLinkBox {
+  clear: both;
+  margin-top:0.3em;
+}

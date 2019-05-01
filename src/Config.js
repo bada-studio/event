@@ -1,5 +1,6 @@
 const Config = {
-  sponsor: "EOS New York",
+  appName: "Klaytn Knights",
+  appDesc: "Klaytn Knights 에서 모험을 즐기세요! 내용이 더필요해요!",
   sponsorLink: "https://www.eosnewyork.io/",
   sponsorImage: "https://eosknights.io/img/bp/eosnewyork.png",
   itemName: "Liberty Mace",

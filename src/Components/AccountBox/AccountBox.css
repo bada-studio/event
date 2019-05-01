@@ -1,0 +1,32 @@
+.AccountBox {
+  margin-top:70px;
+  margin-bottom:1em;
+}
+
+.AccountBox h3 {
+  font-size:1.2em;
+  margin:0;
+  padding:0;
+}
+
+.AccountBox .Desc {
+  font-size:0.9em;
+  margin:0;
+  padding:0;
+  color:#AAA;
+}
+
+.AccountBox .AppIcon {
+  width: 120px;
+  height: auto;
+}
+
+.AccountBox .AppLinkBox {
+  clear: both;
+  margin-top:0.3em;
+}
+
+.AccountBox .address {
+  font-size:0.8em;
+  text-decoration: underline;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Header, Footer } from "./Components";
-import { HeadingBox, ShopItemList } from "./Containers";
+import { Header, PostWrapper } from "./Components";
+import { PostContainer } from "./Containers";
+import ScatterBridge from "./Utils/ScatterBridge";
 import Config from "./Config";
 import Alert from 'react-s-alert';
 
@@ -15,19 +16,22 @@ class App extends Component {
     this.state = {
     };
 
+    this.scatter = new ScatterBridge(Config.network, "EK Event");
     this.onClick = this.onClick.bind(this);
   }
 
   async onClick() {
+    const scatter = this.scatter;
+    await scatter.connect();
+    await scatter.loadContract("eosknightsio");
+    await scatter.contract.signup(scatter.account.name, scatter.auth);
   }
 
   render() {
     return (
       <div>
         <Header/>
-        <HeadingBox/>
-        <ShopItemList/>
-        <Footer/>
+        <PostContainer/>
         <Alert stack={{limit: 3}} />
       </div>
     );

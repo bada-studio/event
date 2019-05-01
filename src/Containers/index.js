@@ -1,7 +1,5 @@
-import ShopItemList from './ShopItemList/ShopItemList';
-import HeadingBox from './HeadingBox/HeadingBox';
+import PostContainer from './PostContainer/PostContainer';
 
 export {
-    ShopItemList,
-    HeadingBox
+    PostContainer
 };
